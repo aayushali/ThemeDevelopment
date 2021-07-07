@@ -18,28 +18,7 @@ get_header();
                         <?php if (have_posts()): ?>
                             <?php while (have_posts()): ?>
                                 <?php the_post(); ?>
-                                <div class="blog-post">
-                                    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                                    <?php if (has_post_thumbnail()):
-                                        $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'blog-thumbnail'); ?>
-                                        <div class="blog-post-thumb">
-                                            <a href="<?php the_permalink(); ?>"><img
-                                                        src="<?php echo $featured_image[0]; ?>" alt=""/></a>
-                                        </div>
-                                    <?php endif; ?>
-                                    <?php the_excerpt(); ?>
-                                    <a href="<?php the_permalink(); ?>"
-                                       class="read-more-link"><?php _e('Read More'); ?></a>
-                                    <?php $categories = get_the_category(); ?>
-                                    <?php if (!empty($categories)) : ?>
-                                        <div class="posted-in">
-                                            <span><?php _e('Posted In', 'nd_dosth'); ?></span>
-                                            <a href="<?php echo get_category_link($categories[0]->term_id); ?>">
-                                                <?php echo $categories[0]->name; ?>
-                                            </a>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
+                                <?php get_template_part('parts/blog', 'index'); ?>
                             <?php endwhile; ?>
                             <?php the_posts_pagination(array('prev_text' => __('PREVIOUS', 'codewithme'), 'next_text' => __('NEXT', 'codewithme'))); ?>
                         <?php else: ?>
@@ -48,11 +27,7 @@ get_header();
                     <?php endif; ?>
                 </div>
                 <div id="blog-sidebar" class="col-md-4">
-                    <?php if (is_active_sidebar('blog')): ?>
-                        <div class="blog-widgets-container">
-                            <?php dynamic_sidebar('blog'); ?>
-                        </div>
-                    <?php endif; ?>
+                    <?php get_sidebar(); ?>
                 </div>
             </div>
         <?php endif; ?>
