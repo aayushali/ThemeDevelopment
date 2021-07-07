@@ -6,15 +6,12 @@
  * and one of the two required files for a theme (the other being style.css).
  * It is used to display a page when nothing more specific matches a query.
  * E.g., it puts together the home page when no home.php file exists.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package Dosth
  */
 get_header();
 ?>
     <div class="content-container">
         <?php if (is_home()) : ?>
+            <h1 class="page-title"><?php single_post_title(); ?></h1>
             <div class="container">
                 <div class="row">
                     <div class="blog-posts col-md-8">
@@ -33,18 +30,29 @@ get_header();
                                     <?php the_excerpt(); ?>
                                     <a href="<?php the_permalink(); ?>"
                                        class="read-more-link"><?php _e('Read More'); ?></a>
-                                    <div class="posted-in">
-                                        <span><?php _e('Posted In', 'codewithme'); ?></span>
-                                        <span><?php the_category(','); ?></span>
-                                    </div>
+                                    <?php $categories = get_the_category(); ?>
+                                    <?php if (!empty($categories)) : ?>
+                                        <div class="posted-in">
+                                            <span><?php _e('Posted In', 'nd_dosth'); ?></span>
+                                            <a href="<?php echo get_category_link($categories[0]->term_id); ?>">
+                                                <?php echo $categories[0]->name; ?>
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             <?php endwhile; ?>
+                            <?php the_posts_pagination(array('prev_text' => __('PREVIOUS', 'codewithme'), 'next_text' => __('NEXT', 'codewithme'))); ?>
                         <?php else: ?>
                         <p><?php _e('No Blog Posts found', 'codewithme'); ?></p>
                     </div>
                     <?php endif; ?>
                 </div>
                 <div id="blog-sidebar" class="col-md-4">
+                    <?php if (is_active_sidebar('blog')): ?>
+                        <div class="blog-widgets-container">
+                            <?php dynamic_sidebar('blog'); ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>

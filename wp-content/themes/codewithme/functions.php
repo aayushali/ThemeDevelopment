@@ -141,6 +141,9 @@ function nd_codewithme_theme_setup() {
     // Add Featured image support
     add_theme_support('post-thumbnails');
 
+    // Add HTML5 Support
+    add_theme_support('html5', array('search-form', 'comment-list', 'comment-form', 'gallery', 'caption'));
+
 
     // Register Navigation Menus
     register_nav_menus( array(
@@ -180,6 +183,18 @@ function nd_codewithme_register_sidebars() {
 		'before_title'  => '<h4 class="widget-title">',
 		'after_title'   => '</h4>',
     ) );
+
+
+// register sidebar for blog post
+    register_sidebar(array(
+        'name' => esc_html__('Blog', 'codewithme'),
+        'id' => 'blog',
+        'description' => esc_html__('Widgets added here would appear inside the all blog pages', 'codewithme'),
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '',
+        'after_title' => '',
+    ));
 
 }
 add_action( 'widgets_init', 'nd_codewithme_register_sidebars' );
