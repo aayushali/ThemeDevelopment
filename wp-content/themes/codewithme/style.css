@@ -976,11 +976,9 @@ header[role="banner"]{
 .no-svg .search-form input[type="submit"]{
 	background-image:url(assets/images/search.png);
 }
-
 /*-------------------------------------------------------------------------------
   16.Single Blog Post page styling
 -------------------------------------------------------------------------------*/
-
 .single .full-width-featured-image{
 	min-height:500px;
 	display:flex;
@@ -1016,7 +1014,6 @@ header[role="banner"]{
 	margin-bottom:10px;
 	margin-top:30px;
 }
-
 .single .article-info a{
 	font-size:16px;
 	color:#1a3794;
@@ -1027,7 +1024,6 @@ header[role="banner"]{
 .single #actual-article p{
 	font-size:16px;
 }
-
 /*-------------------------------------------------------------------------------
   17.Comment Section Styling
 -------------------------------------------------------------------------------*/
