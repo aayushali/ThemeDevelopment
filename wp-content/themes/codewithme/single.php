@@ -19,22 +19,50 @@ get_header();
                         <?php $categories = get_the_category(); ?>
                         <?php if (!empty($categories)) : ?>
                             <div class="posted-in">
-                                <h4><?php _e('Posted In', 'nd_dosth'); ?></h4>
+                                <h4><?php _e('Posted In', 'codewithme'); ?></h4>
                                 <?php the_category(); ?>
                             </div>
                         <?php endif; ?>
                         <div class="published-on">
-                            <h4><?php _e('Publish On', 'nd_dosth'); ?></h4>
+                            <h4><?php _e('Publish On', 'codewithme'); ?></h4>
                             <?php the_date(); ?>
                         </div>
                         <div class="post-author">
-                            <h4><?php _e('Author', 'nd_dosth'); ?></h4>
+
+                            <h4><?php _e('Author', 'codewithme'); ?></h4>
                             <a class="author-archive"
                                href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>">
                                 <?php the_author(); ?>
                             </a>
-                            <?php echo get_avatar(get_the_author_meta('ID'), 100); ?>
+                            <?php echo get_avatar(get_the_author_meta('ID'), 50); ?>
                         </div>
+                        <?php $category_term_list = wp_list_pluck( get_the_category(), 'slug' ); ?>
+                        <?php
+                        $related_posts_query = new WP_Query(
+                            array(
+                                'post_type' => 'post',
+                                "posts_per_page" => 2,
+                                'post__not_in' => array( get_the_ID() ),
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy' => 'category',
+                                        'terms' => $category_term_list,
+                                        'field' => 'slug',
+                                    )
+                                )
+                            )
+                        );
+                        ?>
+                        <?php if( $related_posts_query->have_posts() ): ?>
+                            <section class="blog-posts related-articles">
+                                <h2><?php _e( 'Related Articles', 'codewithme' ); ?></h2>
+                                <?php while( $related_posts_query->have_posts() ): ?>
+                                    <?php $related_posts_query->the_post(); ?>
+                                    <?php get_template_part( 'parts/blog', 'index' ); ?>
+                                <?php endwhile; ?>
+                                <?php wp_reset_postdata(); ?>
+                            </section>
+                        <?php endif;  ?>
                     </div>
                     <div id="actual-article" class="col-md-8">
                         <?php the_content(); ?>

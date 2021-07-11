@@ -1,5 +1,9 @@
 <div class="blog-post">
-    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+    <?php if( is_front_page() || is_single() ): ?>
+        <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+    <?php else: ?>
+        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+    <?php endif; ?>
     <?php if (has_post_thumbnail()):
         $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'blog-thumbnail'); ?>
         <div class="blog-post-thumb">

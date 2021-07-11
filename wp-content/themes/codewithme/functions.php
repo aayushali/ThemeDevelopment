@@ -121,3 +121,59 @@ function aayush_output_post_thumb_and_title($post_id)
         </a>
     </div>
 <?php }
+
+/**
+ * Register Custom Post Types
+ */
+function aka_register_custom_post_types()
+{
+    // Register Reviews Post Type
+    register_post_type('aka_reviews',
+        array(
+                'labels' => array(
+                        'name' => __('Reviews', 'codewithme'),
+                    'singular_name' => __('Review', 'codewithme'),
+                    'add_new' => __('Add Review', 'codewithme'),
+                    'add_new_item' => __('Add New Review', 'codewithme'),
+                    'edit_item' => __('Edit Reviews', 'codewithme'),
+                    'all_items' => __('All Reviews' , 'codewithme'),
+                    'not_found' => __(' No Reviews Found', 'codewithme'),
+                ),
+                'menu_icon' => 'dashicons-format-quote',
+                'public' => true,
+            'exclude_from_search' => true,
+            'has_archive' => true,
+            'hierarchical' => false,
+            'show_in_rest' => true,
+            'rewrite' => array('slug'=> 'reviews'),
+            'supports' => array('title', 'editor', 'custom-fields', 'thumbnail', 'excerpt', 'revisions', 'page-attributes'),
+            //'taxonomies' => array('category', 'post_tag')
+
+            ));
+
+}
+
+add_action('init', 'aka_register_custom_post_types');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

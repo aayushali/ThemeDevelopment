@@ -8,9 +8,8 @@
  *
  * @package Dosth App
  */
-
 get_header();
-?><?php while( have_posts() ): ?>
+?><?php while (have_posts()): ?>
     <?php the_post(); ?>
     <div class="actual-content above-the-fold">
         <div class="container">
@@ -21,9 +20,9 @@ get_header();
             </div>
         </div>
         <section id="watch-dosth-in-action">
-            <h2><?php echo get_post_meta(get_the_ID(), 'second_section_headline', true ); ?></h2>
+            <h2><?php echo get_post_meta(get_the_ID(), 'second_section_headline', true); ?></h2>
             <div class="section-content">
-                <?PHP echo get_post_meta(get_the_ID(), 'section_two_content', true ); ?>
+                <?PHP echo get_post_meta(get_the_ID(), 'section_two_content', true); ?>
             </div>
         </section>
         <section id="section-three">
@@ -33,9 +32,9 @@ get_header();
             </div>
         </section>
         <section id="app-feature-one">
-            <img src="<?php the_field('app_feature_one_image');  ?>"  alt="no image here"/>
+            <img src="<?php the_field('app_feature_one_image'); ?>" alt="no image here"/>
             <div class="section-content">
-                <?php echo get_post_meta(get_the_ID(),'app_feature_one_content', true ); ?>
+                <?php echo get_post_meta(get_the_ID(), 'app_feature_one_content', true); ?>
             </div>
         </section>
         <section id="app-feature-two">
@@ -45,7 +44,7 @@ get_header();
             </div>
         </section>
         <section id="app-feature-three">
-          <h2 style="text-align: center"><?php echo get_post_meta(get_the_ID(),'section_four_title', true); ?></h2>
+            <h2 style="text-align: center"><?php echo get_post_meta(get_the_ID(), 'section_four_title', true); ?></h2>
             <div class="section-content">
                 <?php echo get_post_meta(get_the_ID(), 'section_four_content', true); ?>
             </div>
@@ -55,9 +54,22 @@ get_header();
                 $image_data = wp_get_attachment_image_src($image_id, 'full');
                 $image_url = $image_data[0];
                 ?>
-                <img src="<?php echo $image_url ?>" alt="image" >
+                <img src="<?php echo $image_url ?>" alt="image">
             </div>
         </section>
-    </div>
+        <?php
+        $the_query = new WP_Query(array('post_type' => 'post', 'posts_per_page' => 3)); ?>
+        <?php if($the_query->have_posts()): ?>
+            <section class="blog-posts">
+                <h2><?php _e('Latest Articles', 'codewithme'); ?></h2>
+                <?php while ($the_query->have_posts()): ?>
+                    <?php $the_query->the_post(); ?>
+                    <?php get_template_part('parts/blog', 'index'); ?>
+                <?php endwhile; ?>
+                <?php wp_reset_postdata(); ?>
+            </section>
+        <?php endif; ?>
+
 <?php endwhile; ?>
+<?php get_template_part('parts/reviews', 'slider'); ?>
 <?php get_footer(); ?>
