@@ -158,6 +158,20 @@ add_action('init', 'aka_register_custom_post_types');
 
 
 
+/**
+ * Remove default words from archive titles like "Category:", "Tag:", "Archives:"
+ */
+function nd_dosth_remove_default_archive_words($title) {
+    if ( is_category() ) {
+        $title = single_cat_title( '', false );
+    } elseif ( is_tag() ) {
+        $title = single_tag_title( '', false );
+    } elseif ( is_author() ) {
+        $title = '<span class="vcard">' . get_the_author() . '</span>' ;
+    }
+    return $title;
+}
+add_filter( 'get_the_archive_title', 'nd_dosth_remove_default_archive_words');
 
 
 
