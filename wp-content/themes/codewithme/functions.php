@@ -1,4 +1,9 @@
 <?php
+/**
+ * Theme Customization OPtions
+ */
+require_once( get_template_directory() . '/customize/customize.php');
+
 function nd_codewithme_enqueue_styles()
 {
     wp_enqueue_style('normalize', get_stylesheet_directory_uri() . '/assets/css/normalize.css', array(), false, 'all');
@@ -122,7 +127,6 @@ function aayush_output_post_thumb_and_title($post_id)
     </div>
 <?php }
 
-
 /**
  * Remove default words from archive titles like "Category:", "Tag:", "Archives:"
  */
@@ -142,6 +146,18 @@ add_filter('get_the_archive_title', 'nd_dosth_remove_default_archive_words');
 
 
 
+function nd_dosth_sanitize_checkbox( $checked ) {
+    // Boolean check.
+    return ( ( isset( $checked ) && true == $checked ) ? true : false );
+}
+function nd_dosth_hide_readmore_on_condition( $control ) {
+    $setting = $control->manager->get_setting( 'nd_dosth_show_readmore' );
+    if( ( true == $setting->value() ) and ( is_archive() || is_front_page() || is_home() ) ){
+        return true;
+    } else{
+        return false;
+    }
+}
 
 
 

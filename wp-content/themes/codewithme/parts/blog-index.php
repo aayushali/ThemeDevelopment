@@ -1,5 +1,5 @@
 <div class="blog-post">
-    <?php if( is_front_page() || is_single() ): ?>
+    <?php if (is_front_page() || is_single()): ?>
         <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
     <?php else: ?>
         <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
@@ -12,8 +12,11 @@
         </div>
     <?php endif; ?>
     <?php the_excerpt(); ?>
-    <a href="<?php the_permalink(); ?>"
-       class="read-more-link"><?php _e('Read More'); ?></a>
+    <?php if( get_option('nd_dosth_show_readmore', true ) ): ?>
+        <a class="read-more-link" href="<?php the_permalink(); ?>">
+            <?php echo get_option( 'nd_dosth_readmore_text', __( 'Read More', 'nd_dosth' ) ); ?>
+        </a>
+    <?php endif; ?>
     <?php $categories = get_the_category(); ?>
     <?php if (!empty($categories)) : ?>
         <div class="posted-in">
