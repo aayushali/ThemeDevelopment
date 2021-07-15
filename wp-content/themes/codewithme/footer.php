@@ -5,14 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-<!--                    <div class="copyright">-->
-<!--                        <p>-->
-<!--                            --><?php
-//                            printf('%s. %s &copy; %s', get_bloginfo('name'), get_option('nd_dosth_copyright_text', __
-//                            ('All Rights Reserved', 'codewithme')), date_i18n('Y'));
-//                            ?>
-<!--                        </p>-->
-<!--                    </div>-->
+
                     <div class="copyright">
                         <p>
                             <?php
