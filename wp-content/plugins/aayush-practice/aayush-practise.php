@@ -27,15 +27,18 @@ class AayushPlugin
 {
     function activate()
     {
-
+        // generate a CPT
+        // flush the rewrite rules
     }
 
     function deactivate()
     {
+        // flush the rewrite rules
     }
 
     function uninstall()
     {
+        // delete the CPT
     }
 }
 
