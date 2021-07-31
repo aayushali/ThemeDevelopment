@@ -10,20 +10,45 @@
  * License: GPLv2 or later
  * Text Domain: aayush-plugin
  */
-
 //These three works as same
-
 /*if (!defined( 'ABSPATH' )){
     die;
 }
 
 */
-
-defined('ABSPATH' ) or die( 'Hey, you can/t access this file, you silly human!' );
+defined('ABSPATH') or die('Hey, you can/t access this file, you silly human!');
 
 /*if (! function_exists('add_action')){
     echo 'Hey, you can\t access this file, you silly human!';
     exit;
 }*/
 
+class AayushPlugin
+{
+    function activate()
+    {
 
+    }
+
+    function deactivate()
+    {
+    }
+
+    function uninstall()
+    {
+    }
+}
+
+if (class_exists('AayushPlugin')) {
+    $aayushPlugin = new AayushPlugin();
+}
+
+//activation
+
+register_activation_hook( __FILE__, array( $aayushPlugin, 'activate' ));
+
+//deactivation
+
+register_deactivation_hook( __FILE__ , array( $aayushPlugin, 'deactivate' ));
+
+// uninstall
