@@ -31,6 +31,10 @@ class AayushPlugin
         add_action('init', array( $this, 'custom_post_type'));
     }
 
+    function register(){
+        add_action('admin_enqueue_scripts' , array ($this , 'enqueue'));
+    }
+
     function activate()
     {
 
@@ -55,10 +59,16 @@ class AayushPlugin
     function custom_post_type() {
         register_post_type('book',['public'=> true, 'label' => 'Books']);
     }
+    function enqueue() {
+        //enqueue all our scripts
+        wp_enqueue_style( 'my-plugin-style', plugins_url( '/assets/aka.css' , __FILE__) );
+        wp_enqueue_script( 'my-plugin-script', plugins_url('/assets/scripts.js', __FILE__));
+    }
 }
 
 if (class_exists('AayushPlugin')) {
     $aayushPlugin = new AayushPlugin();
+    $aayushPlugin -> register();
 }
 
 //activation
