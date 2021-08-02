@@ -25,6 +25,11 @@ defined('ABSPATH') or die('Hey, you can/t access this file, you silly human!');
 
 class AayushPlugin
 {
+    function __construct()
+    {
+        add_action('init', array($this, 'custom_post_type'));
+    }
+
     function activate()
     {
         // generate a CPT
@@ -39,6 +44,10 @@ class AayushPlugin
     function uninstall()
     {
         // delete the CPT
+    }
+
+    function custom_post_type() {
+        register_post_type('book',['public'=> 'true', 'label' => 'Books']);
     }
 }
 
