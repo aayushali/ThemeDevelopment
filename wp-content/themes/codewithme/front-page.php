@@ -19,6 +19,7 @@ get_header();
                 </div>
             </div>
         </div>
+
         <section id="watch-dosth-in-action">
             <h2><?php echo get_post_meta(get_the_ID(), 'second_section_headline', true); ?></h2>
             <div class="section-content">
